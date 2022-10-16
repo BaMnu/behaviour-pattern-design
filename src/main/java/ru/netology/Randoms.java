@@ -14,7 +14,7 @@ public class Randoms implements Iterable<Integer> {
     }
 
     @Override
-    public Iterator<Integer> getIterator() {
+    public Iterator<Integer> iterator() {
         return new RandomsIterator();
     }
 
