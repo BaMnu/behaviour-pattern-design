@@ -19,16 +19,19 @@ public class Randoms implements Iterable<Integer> {
     }
 
     private class RandomsIterator implements Iterator<Integer> {
-        private int index;
+        private Iterator<Integer> it = numbers.iterator();
 
         @Override
         public boolean hasNext() {
-            return index < numbers.size();
+            return !numbers.isEmpty();
         }
 
         @Override
         public Integer next() {
-            return numbers.get(index++);
+            if (!it.hasNext()) {
+                it = numbers.iterator();
+            }
+            return it.next();
         }
     }
 }
