@@ -1,16 +1,21 @@
 package ru.netology;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Random;
 
 public class Randoms implements Iterable<Integer> {
-    public List<Integer> numbers;
+    protected Random random;
+    private final int min;
+    private final int max;
 
-    public Randoms(int min, int max) {
-        numbers = new ArrayList<>();
-        for (int i = min; i <= max; i++) {
-            numbers.add(i);
+    protected Randoms(int min, int max) {
+        this.min = min;
+        this.max = max;
+        random = new Random();
+        if (min > max) {
+            throw new IllegalArgumentException("Первое число 'min' должно быть меньше второго 'max'!");
         }
-        Collections.shuffle(numbers);
+        random.nextInt(min, max);
     }
 
     @Override
@@ -19,19 +24,19 @@ public class Randoms implements Iterable<Integer> {
     }
 
     private class RandomsIterator implements Iterator<Integer> {
-        private Iterator<Integer> it = numbers.iterator();
-
         @Override
         public boolean hasNext() {
-            return !numbers.isEmpty();
+            return true;
         }
 
         @Override
         public Integer next() {
-            if (!it.hasNext()) {
-                it = numbers.iterator();
+            int limit = max + 1;
+            int x = random.nextInt(min, limit);
+            if (x != random.nextInt(min, limit)) {
+                x = random.nextInt(min, limit);
             }
-            return it.next();
+            return x;
         }
     }
 }
