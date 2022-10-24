@@ -11,7 +11,7 @@ public class Randoms implements Iterable<Integer> {
     protected Randoms(int min, int max) {
         this.min = min;
         this.max = max;
-        if (min > max) {
+        if (min >= max) {
             throw new IllegalArgumentException("Первое число 'min' должно быть меньше второго 'max'!");
         }
         random.nextInt(min, max);
